@@ -1,36 +1,25 @@
-'use strict'
+// conexion a la base de datos
+const dbConnection = require('./lib/connectMongoose');
 
-//conexion a la BD
+// modelo de anuncios
+const Anuncio = require('./models/Anuncio');
+const anuncioData = require('./anuncios.json');
 
-const dbConnection = require('./lib/connectMongoose') //Esta es la conexión 
-//const mongoose = require('mongoose') //Tambien sirve
 
-
-//modelo de agentes
-
-const Anuncio = require('./models/Anuncio')
-const anuncioData = require('./anuncios.json')
-const { db } = require('./models/Anuncio')
-
-main().then(err => { //el then actua como catch para devolver un error
-    console.log('Hubo un error')
-})
+main().catch(err => console.log('Hubo un error', err));
 
 async function main() {
     await initAnuncios();
 
-    dbConnection.close()
+    dbConnection.close();
 }
 
 async function initAnuncios() {
-    // elimino todos los documentos de la table anuncios
+    // elimino todos los documentos de la colección de anuncios
     const deleted = await Anuncio.deleteMany();
-    console.log(`Borrados ${deleted.deletedCount} anuncios`)
+    console.log(`Eliminados ${deleted.deletedCount} anuncios.`);
 
-    // crear anuncios iniciales importados desde JSON
-
-    const anuncios = await Agente.insertMany(anuncioData.anuncios)
-    console.log(`Creados ${anuncios.length} agentes`)
-
-
+    // crear anuncios iniciales
+    const anuncios = await Anuncio.insertMany(anuncioData.anuncios);
+    console.log(`Creados ${anuncios.length} anuncios.`);
 }

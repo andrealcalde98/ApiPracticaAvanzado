@@ -12,6 +12,12 @@ Para iniciar la Base de Datos haremos la siguiente:
     "node install_db.js"
 ```
 
+Al añadirlo a package.json también podemos iniciarlo:
+
+```
+    "npm run initDB"  
+```
+
 _Para iniciar el proyecto en modo desarrollo podemos hacer: 
 
 ```
@@ -20,36 +26,37 @@ _Para iniciar el proyecto en modo desarrollo podemos hacer:
 
 ### Ejectuando peticiones con Postman 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+Para buscar por tags podemos usar Postman, en donde haremos un GET, en params habilitaremos una nueva "Key" llamada "tags" y a su valor le pondremos un nombre para filtrar.
+Ex:
 
 ```
-Da un ejemplo
+    http://localhost:3000/api/anuncios?tags=lifestyle
 ```
 
-### Instalación 🔧
+Mostrar lista
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+### Creación del anuncio con Postamn 🔧
 
-_Dí cómo será ese paso_
+Para crear un anuncio con Postman deberemos escoger la opción POST, a continuación y con el enlace ya puesto escogeremos "body" e iremos añadiendo los parametros (nombre, venta, precio, foto y tag)
 
-```
-Da un ejemplo
-```
-
-_Y repite_
+Recordamos el esquema para los datos:
 
 ```
-hasta finalizar
+    nombre: String,
+    venta: Boolean,
+    precio: Number,
+    foto: String,
+    tags: [String]
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+Para finalizar y si es correcto nos mostrara el objeto creado.
 
-## Ejecutando las pruebas ⚙️
+## Accediendo a las fotografias 
 
 _Explica como ejecutar las pruebas automatizadas para este sistema_
 
 
-## Construido con 🛠️
+## Frontend API 🛠️
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_
 
@@ -57,7 +64,7 @@ _Menciona las herramientas que utilizaste para crear tu proyecto_
 * [Maven](https://maven.apache.org/) - Manejador de dependencias
 * [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
 
-## Autores ✒️
+## Autore ✒️
 
 * **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
 * **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)

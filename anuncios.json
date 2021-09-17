@@ -1,22 +1,21 @@
 {
-    "anuncio": [
+    "anuncios": [
         {
             "nombre": "Bicicleta",
             "venta": true,
-            "precio": 230.15,
-            "foto": "bici.jpg",
+            "precio": 50,
+            "foto": "/images/anuncios/bici.jpg",
             "tags": [
-                "lifestyle",
-                "motor"
+                "sport",
+                "lifestyle"
             ]
         },
         {
-            "nombre": "iPhone 3GS",
+            "nombre": "iPhone 12",
             "venta": false,
-            "precio": 50.00,
-            "foto": "iphone.png",
+            "precio": 300,
+            "foto": "/images/anuncios/iphone.png",
             "tags": [
-                "lifestyle",
                 "mobile"
             ]
         }

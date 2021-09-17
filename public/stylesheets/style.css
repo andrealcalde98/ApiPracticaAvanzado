@@ -1,8 +1,38 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #ECEFF1;
+}
+
+img {
+  width: 100%;
+}
+
+.title {
+  display: block;
+  background-color: greenyellow;
+  padding: 2rem;
+  width: 100%;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.carta {
+  position: relative;
+  border: black solid 4px;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem;
+  background: white;
+  text-align: left;
 }

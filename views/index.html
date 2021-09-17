@@ -2,18 +2,43 @@
 <html>
 
 <head>
-  <title>
-    <%= title %>
-  </title>
+  <h1 class="title">
+    NodePop
+  </h1>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-  <h1>
-    <%= title %>
-  </h1>
-  <p>Welcome to <%= title %>
-  </p>
+  <div class="container">
+    <% anuncios.forEach(function(anuncios){ %>
+
+      <div class="carta">
+        <dt>
+          <img src="<%= anuncios.foto %>" alt="">
+        </dt>
+        <dt>
+          <b>
+            <%= anuncios.nombre %>
+              <p></p>
+          </b>
+        </dt>
+        <dd>
+          <% if (anuncios.venta) { %>
+            Venta
+            <% } else { %>
+              Busco
+              <% } %>
+        </dd>
+        <dd>
+          <%= anuncios.precio %> €
+        </dd>
+        <dd>
+          <%= anuncios.tags %>
+        </dd>
+      </div>
+      <% }) %>
+
+  </div>
 </body>
 
 </html>

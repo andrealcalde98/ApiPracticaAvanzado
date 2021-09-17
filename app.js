@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var indexAnuncios = require('./routes/api/anuncios');
 
 var app = express();
 
@@ -27,7 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Vinculamos la ruta con la API generada en routes
 app.use('/api/anuncios', require('./routes/api/anuncios'));
 
-app.use('/', indexRouter);
+// app.get('/images/anuncios', function (req, res) {
+// });
+
+app.use('/', indexAnuncios);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
