@@ -4,7 +4,7 @@ Practica de Node.js/MongDB generando una API con express
 
 ## Comenzando 🚀
 
-Estas instrucciones te permitirán arrancar el proyecto y la connexió con la base de datos.
+Estas instrucciones te permitirán arrancar el proyecto y la connexión con la base de datos.
 
 Para iniciar la Base de Datos haremos la siguiente:
 
@@ -24,18 +24,33 @@ _Para iniciar el proyecto en modo desarrollo podemos hacer:
     "npm run dev"  
 ```
 
-### Ejectuando peticiones con Postman 📋
+## Ejectuando peticiones con Postman 📋
 
-Para buscar por tags podemos usar Postman, en donde haremos un GET, en params habilitaremos una nueva "Key" llamada "tags" y a su valor le pondremos un nombre para filtrar.
+Para buscar por tags podemos usar Postman, en donde haremos un GET y en params habilitaremos una nueva "Key" llamada "nombre" y a su valor le pondremos un nombre para filtrar.
+
 Ex:
 
 ```
-    http://localhost:3000/api/anuncios?tags=lifestyle
+    http://localhost:3000/api/anuncios?nombre=bici
 ```
 
-Mostrar lista
+El nombre originar esta en mayúsculas pero debido a que hemos añadido REGEXP podremos hacer busquedas mas avanzadas:
+Ex:
 
-### Creación del anuncio con Postamn 🔧
+```
+    http://localhost:3000/api/anuncios?nombre=i
+```
+
+Nos encotraría el anuncio "iPhone"
+
+De la misma forma podremos buscar por mas campos; nombre de artículo, venta (boolean), precio y etiqueta. Además podremos usar los filtros (skip, limit, sort, select)
+Ex:
+
+```
+    http://localhost:3000/api/anuncios/?nombre=i&precio=10-&venta=false&tags=mobile&limit=1
+```
+
+## Creación del anuncio con Postamn 🔧
 
 Para crear un anuncio con Postman deberemos escoger la opción POST, a continuación y con el enlace ya puesto escogeremos "body" e iremos añadiendo los parametros (nombre, venta, precio, foto y tag)
 
@@ -49,24 +64,81 @@ Recordamos el esquema para los datos:
     tags: [String]
 ```
 
-Para finalizar y si es correcto nos mostrara el objeto creado.
+Para finalizar y si es correcto nos mostrara el objeto creado y un código 201.
 
+Ex:
+
+````
+"result": {
+        "nombre": "Coche",
+        "venta": true,
+        "precio": 10000,
+        "foto": "coche.png",
+        "tags": [
+            "lifestyle, motor"
+        ],
+        "_id": "61460da94ca976ebce7c5f26",
+        "__v": 0
+    }
+````
+## Borrar un anuncio con Postamn 🔧
+
+Para borrar un anuncio unicament escogeremos la opción DELETE en Postman y procederemos a añadir "/id_a_borrar".
+Ex:
+
+```
+http://localhost:3000/api/anuncios/61460c8c4ca976ebce7c5f20
+```
+
+No dará un 200 OK confirmando el funcionamiento.
+
+## Actualización de un anuncio con Postamn 🔧
+
+Esta vez seleccionaremos la opción PUT e igual que con el borrado añadiremos "/id_a_borrar" acompañado de los datos a borrar ya se por enlace o por "Body" en Postman.
+Ex (modificaremos en coche creado anteriormente):
+
+```
+    http://localhost:3000/api/anuncios/61460da94ca976ebce7c5f26
+```
+
+Anuncio cambiado con mensaje 200:
+
+```
+    "result": {
+        "_id": "61460da94ca976ebce7c5f26",
+        "nombre": "Coche",
+        "venta": true,
+        "precio": 10000,
+        "foto": "/images/anuncios/coche.jpg",
+        "tags": [
+            "lifestyle, motor"
+        ],
+        "__v": 0
+    }
+```
 ## Accediendo a las fotografias 
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+Para acceder a las fotografias del proyecto únicamente  hay que ir a la carpeta http://localhost:3000/images/anuncios/nombre_foto
 
+```
+http://localhost:3000/images/anuncios/coche.jpg
+```
 
 ## Frontend API 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+Tenemos disponible una pagina html para representar los datos de la DB, podemos acceder a esta pagina a través del siguiente enlace:
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+````
+    localhost:3000/
+````
 
+Este Frontend tambíen tiene todos los filtros disponibles, por lo tanto si hacemos una búsqueda por algun campo nos renderizarà la targeta.
+Ex:
+
+````
+    http://localhost:3000/?precio=-50&?nombre=b&?tags=sport
+````
 ## Autore ✒️
 
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
+* **André Alcalde** - [andrealcalde98](https://github.com/andrealcalde98)
 
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
