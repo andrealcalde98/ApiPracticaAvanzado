@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <h1 class="title">
+        NodePop
+    </h1>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <p>Etiquetas de cada anuncio</p>
+    <ul>
+        <% anuncios.forEach(function(anuncios){ %>
+            <li>
+                <%= anuncios.tags %>
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>

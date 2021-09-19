@@ -53,7 +53,7 @@ Ex:
 ## Creación del anuncio con Postamn 🔧
 
 Para crear un anuncio con Postman deberemos escoger la opción POST, a continuación y con el enlace ya puesto escogeremos "body" e iremos añadiendo los parametros (nombre, venta, precio, foto y tag)
-
+En "foto" recomendamos poner el enlace "/images/anuncios/iphone.png" ya que tenemos una imagen en el proyecto con ese nombre para el Frontend.
 Recordamos el esquema para los datos:
 
 ```
@@ -65,7 +65,6 @@ Recordamos el esquema para los datos:
 ```
 
 Para finalizar y si es correcto nos mostrara el objeto creado y un código 201.
-
 Ex:
 
 ````
@@ -73,7 +72,7 @@ Ex:
         "nombre": "Coche",
         "venta": true,
         "precio": 10000,
-        "foto": "coche.png",
+        "foto": "coche.jpg",
         "tags": [
             "lifestyle, motor"
         ],
@@ -92,7 +91,7 @@ http://localhost:3000/api/anuncios/61460c8c4ca976ebce7c5f20
 
 No dará un 200 OK confirmando el funcionamiento.
 
-## Actualización de un anuncio con Postamn 🔧
+## Actualización de un anuncio con Postman 🔧
 
 Esta vez seleccionaremos la opción PUT e igual que con el borrado añadiremos "/id_a_borrar" acompañado de los datos a borrar ya se por enlace o por "Body" en Postman.
 Ex (modificaremos en coche creado anteriormente):
@@ -116,12 +115,20 @@ Anuncio cambiado con mensaje 200:
         "__v": 0
     }
 ```
+
+## Accediento a una lista de etiquetas🛠️
+
+Podemos acceder a una lista de etiquetas con el siguiente enlace:
+
+```
+    http://localhost:3000/tags
+```
 ## Accediendo a las fotografias 
 
 Para acceder a las fotografias del proyecto únicamente  hay que ir a la carpeta http://localhost:3000/images/anuncios/nombre_foto
 
 ```
-http://localhost:3000/images/anuncios/coche.jpg
+    http://localhost:3000/images/anuncios/coche.jpg
 ```
 
 ## Frontend API 🛠️
@@ -138,7 +145,7 @@ Ex:
 ````
     http://localhost:3000/?precio=-50&?nombre=b&?tags=sport
 ````
-## Autore ✒️
+## Autor ✒️
 
 * **André Alcalde** - [andrealcalde98](https://github.com/andrealcalde98)
 

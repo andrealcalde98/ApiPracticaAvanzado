@@ -45,27 +45,9 @@ router.get('/', async (req, res, next) => {
       filtro.tags = tags;
     }
 
-    const anuncios = await Anuncio.lista(filtro, skip, limit, select, sort) //busca la lista en el objecto creado conectado a la BBDD
-    res.render('index', { 'anuncios': anuncios })
-    res.json({ results: anuncios }) //lo devuelve el Json
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/tags', async (req, res, next) => {
-  try {
-    const skip = parseInt(req.query.skip)
-    const limit = parseInt(req.query.limit)
-    const sort = req.query.sort
-    const select = 'tags'
-
-    const filtro = {}; //filtro vacio para que devuelta todo
-
-
     const anuncios = await Anuncio.lista(filtro, skip, limit, select, sort)
-    res.render('index', { 'anuncios': anuncios })
-    res.json({ results: anuncios }) //lo devuelve el Json
+    res.render('index', { 'anuncios': anuncios }) // Renderizamos para el frontend
+    res.json({ results: anuncios }) // Lo devuelve el Json
   } catch (err) {
     next(err);
   }
@@ -77,8 +59,8 @@ router.post('/', async (req, res, next) => {
   try {
     const anunciosData = req.body;
     const anuncio = new Anuncio(anunciosData);
-
     const anuncioCreado = await anuncio.save(); // creamos anuncio en la BBDD
+
     res.status(201).json({ result: anuncioCreado });
   } catch (err) {
     next(err);
@@ -103,7 +85,6 @@ router.put('/:id', async (req, res, next) => {
   try {
     const _id = req.params.id;
     const anunciosData = req.body;
-
     const anuncioActualizado = await Anuncio.findOneAndUpdate({ _id: _id }, anunciosData, {
       new: true // si no lo ponemos nos devuelve el dato sin actualizar
     })
@@ -113,8 +94,6 @@ router.put('/:id', async (req, res, next) => {
 
   }
 })
-
-
 
 module.exports = router;
 
