@@ -2,8 +2,22 @@
 
 const { query } = require('express');
 const express = require('express')
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/images/anuncios')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
 const router = express.Router();
 const Anuncio = require('../../models/Anuncio')
+
+// Requester de miniatura
+const { Requester } = require('cote');
+const requester = new Requester({ name: 'publisher' });
 
 router.get('/', async (req, res, next) => {
     try {
@@ -54,15 +68,40 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// POST /api/anuncios (body) -> completar en Postman
-// Crear un agente
-router.post('/', async (req, res, next) => {
+// // POST /api/anuncios (body) -> completar en Postman
+// // Crear un anuncio
+// router.post('/', async (req, res, next) => {
+//     try {
+//         const anunciosData = req.body;
+//         const anuncio = new Anuncio(anunciosData);
+//         const anuncioCreado = await anuncio.save(); // creamos anuncio en la BBDD
+
+//         res.status(201).json({ result: anuncioCreado });
+//     } catch (err) {
+//         next(err);
+//     }
+// });
+
+// POST /api/anuncios (body) -> completar en Postman | Multer
+// Crear un anuncio
+router.post('/', upload.single('foto'), async (req, res, next) => {
     try {
-        const anunciosData = req.body;
+        const fotoPath = '/images/anuncios/' + req.file.originalname;
+        const anunciosData = { ...req.body, foto: fotoPath };
         const anuncio = new Anuncio(anunciosData);
         const anuncioCreado = await anuncio.save(); // creamos anuncio en la BBDD
 
         res.status(201).json({ result: anuncioCreado });
+
+        // crear miniatura
+        requester.send({
+            type: 'thumbnail',
+            url: req.file.path,
+            name: req.file.originalname,
+        }, resultado => {
+            console.log('publisher obtiene resultado: ', resultado);
+        })
+
     } catch (err) {
         next(err);
     }

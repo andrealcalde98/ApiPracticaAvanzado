@@ -6,13 +6,13 @@ Practica de Node.js/MongDB generando una API con express
 
 Estas instrucciones te permitirán arrancar el proyecto y la connexión con la base de datos.
 
-Para iniciar la Base de Datos haremos la siguiente:
+Para iniciar la Base de Datos haremos lo siguiente:
 
 ```
     "node install_db.js"
 ```
 
-Al añadirlo a package.json también podemos iniciarlo:
+Al añadirlo a package.json también podemos iniciarlo con el atajo:
 
 ```
     "npm run initDB"  

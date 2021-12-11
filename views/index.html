@@ -2,43 +2,51 @@
 <html>
 
 <head>
-  <h1 class="title">
-    NodePop
-  </h1>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-  <div class="container">
-    <% anuncios.forEach(function(anuncios){ %>
+  <% getLocales().forEach(locale=> { %>
+    <a href="/change-locale/<%= locale %>">
+      <%= locale %>
+    </a>&nbsp;
+    <% }) %>
 
-      <div class="carta">
-        <dt>
-          <img src="<%= anuncios.foto %>" alt="">
-        </dt>
-        <dt>
-          <b>
-            <%= anuncios.nombre %>
-              <p></p>
-          </b>
-        </dt>
-        <dd>
-          <% if (anuncios.venta) { %>
-            Venta
-            <% } else { %>
-              Busco
-              <% } %>
-        </dd>
-        <dd>
-          <%= anuncios.precio %> €
-        </dd>
-        <dd>
-          Tags: <%= anuncios.tags %>
-        </dd>
+      <h1 class="title">
+        <%= __('Bienvenido a Nodepop') %>
+      </h1>
+
+      <div class="container">
+        <% anuncios.forEach(function(anuncios){ %>
+
+          <div class="carta">
+            <dt>
+              <img src="<%= anuncios.foto %>" alt="img">
+            </dt>
+            <dt>
+              <b>
+                <%= anuncios.nombre %>
+                  <p></p>
+              </b>
+            </dt>
+            <dd>
+              <% if (anuncios.venta) { %>
+                <%= __('Venta') %>
+                  <% } else { %>
+                    <%= __('Busco') %>
+                      <% } %>
+            </dd>
+            <dd>
+              <%= anuncios.precio %> €
+            </dd>
+            <dd>
+              <%= __('Etiquetas') %>:
+                <%= anuncios.tags %>
+            </dd>
+          </div>
+          <% }) %>
+
       </div>
-      <% }) %>
-
-  </div>
 </body>
 
 </html>
