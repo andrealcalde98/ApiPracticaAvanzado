@@ -23,106 +23,51 @@ _Para iniciar el proyecto en modo desarrollo podemos hacer:
 ```
     "npm run dev"  
 ```
+## Autenticación🔧
 
-## Ejectuando peticiones con Postman 📋
 
-Para buscar por tags podemos usar Postman, en donde haremos un GET y en params habilitaremos una nueva "Key" llamada "nombre" y a su valor le pondremos un nombre para filtrar.
+Al hacer un POST hacia authenticate nos devuelve un token para acceder a los end points protegidos.
 
 Ex:
 
 ```
-    http://localhost:3000/api/anuncios?nombre=bici
+    http://localhost:3000/api/authenticate
 ```
 
-El nombre originar esta en mayúsculas pero debido a que hemos añadido REGEXP podremos hacer busquedas mas avanzadas:
+Las direccion protegida es:
+
 Ex:
 
 ```
-    http://localhost:3000/api/anuncios?nombre=i
+    http://localhost:3000/api/anuncios
 ```
 
-Nos encotraría el anuncio "iPhone"
+Nos devolvera un JSON con la información del login, nos devolverá un HTTP 401 y la info del error tanto si el token ha caducado, hay un error o no existe.
 
-De la misma forma podremos buscar por mas campos; nombre de artículo, venta (boolean), precio y etiqueta. Además podremos usar los filtros (skip, limit, sort, select)
-Ex:
 
-```
-    http://localhost:3000/api/anuncios/?nombre=i&precio=10-&venta=false&tags=mobile&limit=1
-```
+## Internaccionalización 🔧
 
-## Creación del anuncio con Postamn 🔧
+Si accedemos a la dirección web de nuestro API nos devuelve los anuncios disponibles, tendremos un switch para cambiar el idioma entre Español e Inglés.
 
-Para crear un anuncio con Postman deberemos escoger la opción POST, a continuación y con el enlace ya puesto escogeremos "body" e iremos añadiendo los parametros (nombre, venta, precio, foto y tag)
-En "foto" recomendamos poner el enlace "/images/anuncios/iphone.png" ya que tenemos una imagen en el proyecto con ese nombre para el Frontend.
-Recordamos el esquema para los datos:
+
+## Subida de imagen con tarea en background 🔧
+
+Este API permite subir una imagen des de /api/anuncios en modo form-data:
 
 ```
-    nombre: String,
-    venta: Boolean,
-    precio: Number,
-    foto: String,
-    tags: [String]
+http://localhost:3000/api/anuncios
 ```
 
-Para finalizar y si es correcto nos mostrara el objeto creado y un código 201.
-Ex:
+Cada vez que creemos subamos una imagen nos creara un thumbnail en el servidor en la direccion /public/images/thumbnails.
 
-````
-"result": {
-        "nombre": "Coche",
-        "venta": true,
-        "precio": 10000,
-        "foto": "coche.jpg",
-        "tags": [
-            "lifestyle, motor"
-        ],
-        "_id": "61460da94ca976ebce7c5f26",
-        "__v": 0
-    }
-````
-## Borrar un anuncio con Postamn 🔧
-
-Para borrar un anuncio unicament escogeremos la opción DELETE en Postman y procederemos a añadir "/id_a_borrar".
-Ex:
+En este caso para encender el worker que nos permite generar miniatures dentremos que ejectura el siguiente controlador:
 
 ```
-http://localhost:3000/api/anuncios/61460c8c4ca976ebce7c5f20
+nodemon conversionService.js
 ```
 
-No dará un 200 OK confirmando el funcionamiento.
+Con este servicio ejecutando tendremos un worker que espera al POST que ejectura un publisher pidiendo que convierta en miniatura la imagen subida por el usuario.
 
-## Actualización de un anuncio con Postman 🔧
-
-Esta vez seleccionaremos la opción PUT e igual que con el borrado añadiremos "/id_a_borrar" acompañado de los datos a borrar ya se por enlace o por "Body" en Postman.
-Ex (modificaremos en coche creado anteriormente):
-
-```
-    http://localhost:3000/api/anuncios/61460da94ca976ebce7c5f26
-```
-
-Anuncio cambiado con mensaje 200:
-
-```
-    "result": {
-        "_id": "61460da94ca976ebce7c5f26",
-        "nombre": "Coche",
-        "venta": true,
-        "precio": 10000,
-        "foto": "/images/anuncios/coche.jpg",
-        "tags": [
-            "lifestyle, motor"
-        ],
-        "__v": 0
-    }
-```
-
-## Accediento a una lista de etiquetas🛠️
-
-Podemos acceder a una lista de etiquetas con el siguiente enlace:
-
-```
-    http://localhost:3000/tags
-```
 ## Accediendo a las fotografias 
 
 Para acceder a las fotografias del proyecto únicamente  hay que ir a la carpeta http://localhost:3000/images/anuncios/nombre_foto
