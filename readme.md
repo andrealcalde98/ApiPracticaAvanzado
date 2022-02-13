@@ -20,8 +20,6 @@ contraseña: 123456
     "http://3.229.242.209/"
 ```
 
-Practica de Node.js/MongDB generando una API con express
-
 ## Comenzando 🚀
 
 Estas instrucciones te permitirán arrancar el proyecto y la connexión con la base de datos.
