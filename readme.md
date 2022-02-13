@@ -1,5 +1,22 @@
 # ApiPractica
 
+Enlace producción Práctica backend por DNS (DevOps)
+
+```
+    "http://ec2-3-229-242-209.compute-1.amazonaws.com/"
+```
+
+Enlace producción Práctica React por IP (DevOps)
+
+Las credenciales para acceder son:
+
+usuario: admin@admin.com
+contraseña: 123456
+
+```
+    "http://3.229.242.209/"
+```
+
 Practica de Node.js/MongDB generando una API con express
 
 ## Comenzando 🚀
